@@ -3,6 +3,8 @@ const User = db.user;
 const Role = db.role;
 const bcrypt = require('bcrypt');
 const Op = db.Sequelize.Op;
+const jwt = require('jsonwebtoken');
+const authConfig = require('../configs/auth.config');
 
 exports.signUp = async (req, res) => {
     const username = req.body.username;
@@ -19,10 +21,13 @@ exports.signUp = async (req, res) => {
             where: {
                 name: {
                     [Op.or]: Array(req.body.roles)
-                  }
+                }
             }
         });
-        res.send(roles);
+        await user.setRoles(roles);
+        res.status(201).json({
+            message: 'User created successfully'
+        })
     }
     else {
         user.setRoles([1]).then(() => {
@@ -32,6 +37,26 @@ exports.signUp = async (req, res) => {
 
 }
 
-exports.signIn = (req, res) => {
-
+exports.signIn = async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = await User.findOne({
+        where: {
+            email: email
+        }
+    });
+    if (user) {
+        if (!bcrypt.compareSync(password, user.password)) {
+            res.send("Password dosen't match");
+        }
+        else {
+            const token = await jwt.sign({ id: user.id }, authConfig.secret_key, { expiresIn: 86400 }); //expires in 24 hours
+            res.status(201).json({
+                token: token
+            });
+        }
+    }
+    else {
+        res.send("No such user found, please sign up to continue");
+    }
 }

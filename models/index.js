@@ -4,8 +4,6 @@ const dbConfig = require('../configs/db.config');
 const User = require('./user.model');
 const Post = require('./post.model');
 const Role = require('./role.model');
-const { id } = require('choco');
-
 const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect
@@ -27,6 +25,7 @@ db.sequelize = sequelize;
 db.user = User(sequelize,Sequelize);
 db.post = Post(sequelize,Sequelize);
 db.role = Role(sequelize,Sequelize);
+db.ROLE = ["user","admin"]
 
 // Relation between user and role tables -> Many to Many
 db.user.belongsToMany(db.role,{

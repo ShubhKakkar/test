@@ -3,8 +3,8 @@ const serverConfig = require('./configs/server.config');
 const bodyParser = require('body-parser');
 
 const app = express();
-bodyParser.json();
-bodyParser.urlencoded({ extended: true });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Dummy Data
 const db = require('./models');
