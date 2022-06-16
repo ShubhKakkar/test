@@ -1,17 +1,20 @@
-module.exports = (sequelize,Sequelize) => {
-    const Post = sequelize.define('post',{
-        id:{
+module.exports = (sequelize, Sequelize) => {
+    const Post = sequelize.define('post', {
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        title:{
+        title: {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        description:{
+        description: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        categories: {
+            type: Sequelize.JSON,
         }
     });
     return Post;

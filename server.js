@@ -33,14 +33,17 @@ function init() {
         {
             title:"My first post",
             description:"Lorem ipsum dolor sit amet.",
+            categories: ["beauty","nature"],
             userId:1
         },{
             title:"My second post",
             description:"Lorem ipsum dolor sit amet.",
+            categories: ["nature","science"],
             userId:2
         },{
             title:"My third post",
             description:"Lorem ipsum dolor sit amet.",
+            categories: ["home","fitness"],
             userId:1
         }
     ]);

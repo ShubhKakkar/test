@@ -4,7 +4,9 @@ const Post = db.post;
 exports.createPost = (req, res) => {
     const post = {
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        categories: req.body.categories,
+        userId:req.body.userId
     };
     Post.create(post).then(() => {
         res.status(201).json({
@@ -48,10 +50,28 @@ exports.findSinglePost = (req, res) => {
     })
 }
 
+exports.findByCategory = (req, res) => {
+    const categoryId = req.params.id;
+    Post.findAll({}).then((posts)=> {
+        const postArray = [];
+        posts.forEach((post)=>{
+                if(post.categories.includes(categoryId)){
+                    postArray.push(post);
+                }
+        });
+        res.status(201).json({
+            posts:postArray,
+        });
+    }).catch((err)=> {
+        message: err.message
+    });
+}
+
 exports.updatePost = (req, res) => {
     const post = {
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        userId: req.body.userId
     }
     Post.update(post, {
         where: {

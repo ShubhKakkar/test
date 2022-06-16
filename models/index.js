@@ -4,6 +4,7 @@ const dbConfig = require('../configs/db.config');
 const User = require('./user.model');
 const Post = require('./post.model');
 const Role = require('./role.model');
+
 const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect
@@ -40,6 +41,5 @@ db.role.belongsToMany(db.user,{
 
 // Relation between user and post tables -> One user can have multiple Posts
 db.user.hasMany(db.post);
-// db.post.belongsToMany(db.user);
 
 module.exports = db;

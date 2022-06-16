@@ -14,6 +14,7 @@ module.exports = (app) => {
     app.get('/social_media/api/v1/posts', postController.findAllPosts);
     app.get('/social_media/api/v1/users/:userId/posts', postController.findByUser);
     app.get('/social_media/api/v1/posts/:id', postController.findSinglePost);
+    app.get('/social_media/api/v1/posts/categories/:id', postController.findByCategory);
     app.put('/social_media/api/v1/update-post', verifyToken, isAdmin, validatePost, postController.updatePost);
     app.delete('/social_media/api/v1/delete-post', verifyToken, isAdmin, deletePost, postController.deletePost);
 }
