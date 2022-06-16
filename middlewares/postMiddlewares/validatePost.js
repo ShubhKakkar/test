@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
         });
         return;
     }
-    if(description.length<200){
+    if(description.length>200){
         res.status(400).json({
             message: 'Description cannot be more than 200 letters in length'
         });

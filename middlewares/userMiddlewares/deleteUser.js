@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../../models");
 const User = db.user;
 module.exports = async (req, res, next) => {
     const id = req.body.id;

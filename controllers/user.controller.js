@@ -23,15 +23,32 @@ exports.findSingleUser = (req, res) => {
 }
 
 exports.updateUser = (req, res) => {
-
+    const user = {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    };
+    User.update(user, {
+        where: {
+            id: req.body.id
+        }
+    }).then((user) => {
+        res.status(201).json({
+            message: "User updated successfully"
+        });
+    }).catch((err) => {
+        res.status(500).json({
+            message: err.message
+        })
+    });
 }
 
 exports.deleteUser = (req, res) => {
     Post.destroy({
-        where:{
-            userId:req.body.id
+        where: {
+            userId: req.body.id
         }
-    }).then(()=>{
+    }).then(() => {
         User.destroy({
             where: {
                 id: req.body.id
@@ -45,7 +62,7 @@ exports.deleteUser = (req, res) => {
                 err: err.message
             });
         });
-    }).catch((err)=>{
+    }).catch((err) => {
         res.status(500).json({
             err: err.message
         });

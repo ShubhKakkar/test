@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../../models');
 const User = db.user;
 const Roles = db.ROLE;
 const verifyDetails = (req, res, next) => {

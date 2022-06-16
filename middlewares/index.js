@@ -1,15 +1,23 @@
-const validateUser = require('./validateUser');
-const validatePost = require('./validatePost');
-const validateSignUp = require('./validateSignUp');
-const validateSignIn = require('./validateSignIn');
-const deleteIdVerfication = require('./deleteUser');
-const verifyJwt = require('./verifyJwt');
+// auth
+const validateSignUp = require('./authMiddlewares/validateSignUp');
+const validateSignIn = require('./authMiddlewares/validateSignIn');
+const verifyJwt = require('./authMiddlewares/verifyJwt');
+// user
+const validateUser = require('./userMiddlewares/validateUser');
+const deleteIdVerfication = require('./userMiddlewares/deleteUser');
+// post
+const validatePost = require('./postMiddlewares/validatePost');
+const deletePost = require('./postMiddlewares/deletePost');
 
 module.exports = {
-    validateUser: validateUser,
-    validatePost: validatePost,
+    // auth
     validateSignUp: validateSignUp,
     validateSignIn: validateSignIn,
+    verifyJwt: verifyJwt,
+    // user
+    validateUser: validateUser,
     deleteIdVerfication: deleteIdVerfication,
-    verifyJwt: verifyJwt
+    // post
+    validatePost: validatePost,
+    deletePost: deletePost
 }
