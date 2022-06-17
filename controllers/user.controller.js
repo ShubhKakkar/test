@@ -68,3 +68,7 @@ exports.deleteUser = (req, res) => {
         });
     })
 }
+
+exports.showAdminPanel = (req, res) => {
+    
+}

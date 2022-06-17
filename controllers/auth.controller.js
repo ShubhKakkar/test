@@ -20,7 +20,7 @@ exports.signUp = async (req, res) => {
         const roles = await Role.findAll({
             where: {
                 name: {
-                    [Op.or]: Array(req.body.roles)
+                    [Op.or]: req.body.roles
                 }
             }
         });
